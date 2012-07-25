@@ -11,6 +11,7 @@ define('formatDate', [], function() {
      */
     return function(dateStr, format) {
         var i, result = '', date, months, pad, timezone, offset = 0;
+        if (typeof dateStr === 'object') dateStr = dateStr.toUTCString();
 
         //determine the timezone of the dateStr or if none, use the local timezone
         timezone = dateStr.match(/([+-])(1[0-2]|[0]?[1-9]):?([0-6][0-9])(?:$|\s)/);
@@ -59,6 +60,7 @@ define('formatDate', [], function() {
                 //Numeric representation of a month, with leading zeros	(01 through 12)
                 case 'm':
                     result += pad(date.getUTCMonth() + 1);
+                    break;
 
                 //A full numeric representation of a year, 4 digits   (e.g. 1999 or 2003)
                 case 'Y':
